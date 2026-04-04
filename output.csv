@@ -1,31 +1,16 @@
-,clash_id,element_1_id,element_1_type,element_2_id,element_2_type,clash_type,x,y,z,severity
-0,C001,P1001,Pipe,D2001,Duct,Hard,3120,540,2400,High
-1,C002,P1002,Pipe,P1003,Pipe,Hard,1520,820,2300,High
-2,C003,D2002,Duct,D2003,Duct,Hard,4520,1220,2600,High
-3,C004,CT3001,CableTray,P1004,Pipe,Hard,2010,610,2200,Medium
-4,C005,CT3002,CableTray,D2004,Duct,Hard,3510,910,2500,High
-5,C006,P1005,Pipe,D2005,Duct,Soft,2820,710,2400,Medium
-6,C007,P1006,Pipe,CT3003,CableTray,Hard,5020,1510,2700,High
-7,C008,D2006,Duct,P1007,Pipe,Soft,3220,1010,2450,Low
-8,C009,P1008,Pipe,D2007,Duct,Hard,4120,1110,2550,High
-9,C010,CT3004,CableTray,CT3005,CableTray,Hard,2920,760,2350,Medium
-10,C011,P1009,Pipe,D2008,Duct,Hard,3800,1000,2400,High
-11,C012,P1010,Pipe,CT3006,CableTray,Soft,2600,900,2300,Low
-12,C013,D2009,Duct,P1011,Pipe,Hard,4100,1200,2500,High
-13,C014,CT3007,CableTray,D2010,Duct,Hard,3600,800,2450,High
-14,C015,P1012,Pipe,P1013,Pipe,Hard,1500,700,2200,High
-15,C016,P1014,Pipe,D2011,Duct,Soft,2900,600,2400,Medium
-16,C017,D2012,Duct,CT3008,CableTray,Hard,4200,1300,2600,High
-17,C018,P1015,Pipe,D2013,Duct,Hard,3300,1100,2550,High
-18,C019,P1016,Pipe,CT3009,CableTray,Soft,2800,950,2350,Low
-19,C020,D2014,Duct,D2015,Duct,Hard,4700,1400,2700,High
-20,C021,P1017,Pipe,D2016,Duct,Hard,3000,800,2400,High
-21,C022,P1018,Pipe,P1019,Pipe,Soft,1700,600,2250,Low
-22,C023,CT3010,CableTray,D2017,Duct,Hard,3500,1000,2500,High
-23,C024,D2018,Duct,P1020,Pipe,Hard,3900,1200,2600,High
-24,C025,P1021,Pipe,CT3011,CableTray,Soft,2600,850,2350,Low
-25,C026,P1022,Pipe,D2019,Duct,Hard,4100,1100,2550,High
-26,C027,D2020,Duct,CT3012,CableTray,Hard,4500,1300,2650,High
-27,C028,P1023,Pipe,P1024,Pipe,Hard,1800,700,2300,High
-28,C029,P1025,Pipe,D2021,Duct,Soft,2900,900,2400,Medium
-29,C030,CT3013,CableTray,P1026,Pipe,Hard,3100,1000,2500,High
+,clash_name,clash_id,status,clash_type,item1_id,item1_name,item1_type,item2_id,item2_name,item2_type,x,y,z,grid,level,severity
+0,Clash-001,C001,New,Hard,P-1001,Pipe Segment 1,Pipe,D-2001,Duct Segment A,Duct,3120,540,2400,A1,Level 2,High
+1,Clash-002,C002,Active,Hard,P-1002,Pipe Segment 2,Pipe,P-1003,Pipe Segment 3,Pipe,1520,820,2300,B2,Level 1,High
+2,Clash-003,C003,Reviewed,Hard,D-2002,Duct Segment B,Duct,D-2003,Duct Segment C,Duct,4520,1220,2600,C3,Level 3,High
+3,Clash-004,C004,New,Hard,CT-3001,Cable Tray 1,CableTray,P-1004,Pipe Segment 4,Pipe,2010,610,2200,A2,Level 2,Medium
+4,Clash-005,C005,Active,Hard,CT-3002,Cable Tray 2,CableTray,D-2004,Duct Segment D,Duct,3510,910,2500,B1,Level 2,High
+5,Clash-006,C006,New,Soft,P-1005,Pipe Segment 5,Pipe,D-2005,Duct Segment E,Duct,2820,710,2400,C2,Level 1,Medium
+6,Clash-007,C007,Active,Hard,P-1006,Pipe Segment 6,Pipe,CT-3003,Cable Tray 3,CableTray,5020,1510,2700,D1,Level 3,High
+7,Clash-008,C008,Reviewed,Soft,D-2006,Duct Segment F,Duct,P-1007,Pipe Segment 7,Pipe,3220,1010,2450,A3,Level 2,Low
+8,Clash-009,C009,New,Hard,P-1008,Pipe Segment 8,Pipe,D-2007,Duct Segment G,Duct,4120,1110,2550,B3,Level 3,High
+9,Clash-010,C010,Active,Hard,CT-3004,Cable Tray 4,CableTray,CT-3005,Cable Tray 5,CableTray,2920,760,2350,C1,Level 2,Medium
+10,Clash-011,C011,New,Hard,P-1009,Pipe Segment 9,Pipe,D-2008,Duct Segment H,Duct,3800,1000,2400,A1,Level 2,High
+11,Clash-012,C012,Reviewed,Soft,P-1010,Pipe Segment 10,Pipe,CT-3006,Cable Tray 6,CableTray,2600,900,2300,B2,Level 1,Low
+12,Clash-013,C013,Active,Hard,D-2009,Duct Segment I,Duct,P-1011,Pipe Segment 11,Pipe,4100,1200,2500,C3,Level 3,High
+13,Clash-014,C014,New,Hard,CT-3007,Cable Tray 7,CableTray,D-2010,Duct Segment J,Duct,3600,800,2450,A2,Level 2,High
+14,Clash-015,C015,Active,Hard,P-1012,Pipe Segment 12,Pipe,P-1013,Pipe Segment 13,Pipe,1500,700,2200,B1,Level 1,High
