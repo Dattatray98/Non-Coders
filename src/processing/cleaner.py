@@ -13,8 +13,8 @@ def cleaner(file_path):
     df.dropna(inplace=True)
     df.columns = [col.strip().lower().replace(" ", "_") for col in df.columns]
 
-    print(df.head())
-
+    df.to_json("output.json", orient="records", indent=4)
+    df.to_csv("output.csv")
 
 class MyHandler(FileSystemEventHandler):
     def on_modified(self, event):
