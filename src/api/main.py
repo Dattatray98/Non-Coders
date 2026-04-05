@@ -35,6 +35,8 @@ def clash_data():
         # We only want raw clash data for this endpoint, not the AI rerouting schema
         json_files = [f for f in os.listdir(output_dir) if f.endswith(".json") and f != "ai_reroutes.json"]
         if json_files:
+            # Serve the most recently modified configuration
+            json_files.sort(key=lambda x: os.path.getmtime(os.path.join(output_dir, x)), reverse=True)
             file_path = os.path.join(output_dir, json_files[0])
             try:
                 with open(file_path, "r") as f:

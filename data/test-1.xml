@@ -21,7 +21,7 @@
           <testtype>Hard</testtype>
           <teststatus>OK</teststatus>
         </summary>
-        <clashresults>
+        <clashresults>  
           <clashresult name="Clash1" guid="090a5f4a-f0b5-4a37-a3ae-9e1e32ba0cfe" href="Test 1_files\cd000001.jpg" status="new" distance="-0.019">
             <resultstatus>New</resultstatus>
             <clashpoint>

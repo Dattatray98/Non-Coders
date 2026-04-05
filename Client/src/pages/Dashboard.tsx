@@ -266,18 +266,18 @@ const Dashboard = () => {
                                                 <p className="text-zinc-400 text-sm leading-relaxed mb-3">
                                                     AI suggests rerouting element <span className="text-blue-400 font-medium">#{suggestion.element_id}</span> for clash <span className="text-white">{suggestion.clash_id}</span>.
                                                 </p>
-                                                <div className="bg-zinc-900 rounded-lg p-3 grid grid-cols-2 gap-2 text-xs">
-                                                    <div>
-                                                        <span className="text-zinc-500 block mb-1">New Position</span>
-                                                        <div className="text-zinc-300 font-mono">X: {suggestion.new_position.x.toFixed(1)}</div>
-                                                        <div className="text-zinc-300 font-mono">Y: {suggestion.new_position.y.toFixed(1)}</div>
-                                                        <div className="text-zinc-300 font-mono">Z: {suggestion.new_position.z.toFixed(1)}</div>
-                                                    </div>
-                                                    <div>
-                                                        <span className="text-zinc-500 block mb-1">Offset (Δ)</span>
-                                                        <div className="text-zinc-300 font-mono">X: {suggestion.offsets.x.toFixed(1)}</div>
-                                                        <div className="text-zinc-300 font-mono">Y: {suggestion.offsets.y.toFixed(1)}</div>
-                                                        <div className="text-zinc-300 font-mono">Z: {suggestion.offsets.z.toFixed(1)}</div>
+                                                <div className="bg-zinc-900 rounded-lg p-3 text-xs">
+                                                    <span className="text-zinc-500 block mb-2 font-semibold">Recommended Rerouting Offset (Δ)</span>
+                                                    <div className="flex gap-3">
+                                                        <div className={`font-mono px-3 py-1.5 rounded border flex-1 text-center ${suggestion.offsets.x !== 0 ? 'bg-blue-500/10 border-blue-500/20 text-blue-400 font-bold' : 'bg-zinc-800/50 border-zinc-800 text-zinc-500'}`}>
+                                                            X: {suggestion.offsets.x > 0 ? '+' : ''}{Number(suggestion.offsets.x.toFixed(3))}
+                                                        </div>
+                                                        <div className={`font-mono px-3 py-1.5 rounded border flex-1 text-center ${suggestion.offsets.y !== 0 ? 'bg-blue-500/10 border-blue-500/20 text-blue-400 font-bold' : 'bg-zinc-800/50 border-zinc-800 text-zinc-500'}`}>
+                                                            Y: {suggestion.offsets.y > 0 ? '+' : ''}{Number(suggestion.offsets.y.toFixed(3))}
+                                                        </div>
+                                                        <div className={`font-mono px-3 py-1.5 rounded border flex-1 text-center ${suggestion.offsets.z !== 0 ? 'bg-blue-500/10 border-blue-500/20 text-blue-400 font-bold' : 'bg-zinc-800/50 border-zinc-800 text-zinc-500'}`}>
+                                                            Z: {suggestion.offsets.z > 0 ? '+' : ''}{Number(suggestion.offsets.z.toFixed(3))}
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </div>

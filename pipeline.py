@@ -2,7 +2,7 @@ import os
 import json
 from src.processing.cleaner import cleaner
 from src.preprocessing.data_preprocessing import preprocessing
-from src.core.engine import run_engine
+from src.ReroutingEngine.engine import run_engine
 
 
 def safe_get_row(df, clash_id):
@@ -88,27 +88,25 @@ def run_full_pipeline(input_file: str):
         print("❌ Local save failed:", e)
         return None
 
-    # --- NETWORK SAVE (ROBUST VERSION) ---
-    network_path = r"\\192.168.12.90\RevitShared"
-    network_file = os.path.join(network_path, "ai_reroutes.json")
+    # # --- NETWORK SAVE (ROBUST VERSION) ---
+    # network_path = r"\\192.168.12.90\RevitShared"
+    # network_file = os.path.join(network_path, "ai_reroutes.json")
 
-    print("📡 Attempting network write...")
+    # print("📡 Attempting network write...")
 
-    try:
-        # Check if path exists
-        if not os.path.exists(network_path):
-            raise Exception("Network path not accessible")
+    # try:
+    #     # Check if path exists
+    #     if not os.path.exists(network_path):
+    #         raise Exception("Network path not accessible")
 
-        # Try writing
-        with open(network_file, "w") as f:
-            json.dump(formatted_results, f, indent=4)
+    #     # Try writing
+    #     with open(network_file, "w") as f:
+    #         json.dump(formatted_results, f, indent=4)
 
-        print("✅ Successfully written to network drive!")
+    #     print("✅ Successfully written to network drive!")
 
-    except PermissionError:
-        print("❌ Permission denied on network path.")
-    except Exception as e:
-        print("❌ Network write failed:", e)
+    # except PermissionError:
+    #     print("❌ Permission denied on network path.")
 
     print("✅ Pipeline complete!")
     return formatted_results
