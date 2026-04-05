@@ -1,8 +1,89 @@
 import time
 import os
 import pandas as pd
+import xml.etree.ElementTree as ET
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
+
+def _get_element_id(clashobj):
+    for attr in clashobj.findall('.//objectattribute'):
+        name = attr.findtext('name')
+        if name == 'Element ID':
+            return attr.findtext('value')
+    return "Unknown"
+
+def _get_item_name(clashobj):
+    for tag in clashobj.findall('.//smarttag'):
+        name = tag.findtext('name')
+        if name == 'Item Name':
+            val = tag.findtext('value') or ''
+            val_lower = val.lower()
+            if 'pipe' in val_lower or 'water' in val_lower:
+                return 'Pipe'
+            elif 'duct' in val_lower:
+                return 'Duct'
+            elif 'tray' in val_lower:
+                return 'CableTray'
+            else:
+                return val
+    return "Unknown"
+
+def parse_navisworks_xml(xml_path):
+    tree = ET.parse(xml_path)
+    root = tree.getroot()
+    data = []
+    
+    for clashtest in root.iter('clashtest'):
+        clash_type = (clashtest.attrib.get('test_type') or 'Hard').capitalize()
+        
+        for result in clashtest.iter('clashresult'):
+            clash_id = result.attrib.get('name')
+            
+            distance = result.attrib.get('distance', '0')
+            severity = "Medium"
+            try:
+                dist_val = abs(float(distance))
+                if dist_val > 0.05:
+                    severity = "High"
+                elif dist_val < 0.01:
+                    severity = "Low"
+            except:
+                pass
+            
+            x, y, z = None, None, None
+            clashpoint = result.find('clashpoint')
+            if clashpoint is not None:
+                pos = clashpoint.find('pos3f')
+                if pos is not None:
+                    x = pos.attrib.get('x')
+                    y = pos.attrib.get('y')
+                    z = pos.attrib.get('z')
+            
+            objects = list(result.find('clashobjects') or [])
+            item1_id, item1_type = "Unknown", "Unknown"
+            item2_id, item2_type = "Unknown", "Unknown"
+            
+            if len(objects) > 0:
+                item1_id = _get_element_id(objects[0])
+                item1_type = _get_item_name(objects[0])
+            if len(objects) > 1:
+                item2_id = _get_element_id(objects[1])
+                item2_type = _get_item_name(objects[1])
+                
+            data.append({
+                "clash_id": clash_id,
+                "item1_id": item1_id,
+                "item1_type": item1_type,
+                "item2_id": item2_id,
+                "item2_type": item2_type,
+                "clash_type": clash_type,
+                "severity": severity,
+                "x": x,
+                "y": y,
+                "z": z
+            })
+            
+    return pd.DataFrame(data)
 
 # CLEANER FUNCTION
 def cleaner(file_path):
@@ -17,10 +98,10 @@ def cleaner(file_path):
 
         elif file_path.endswith(".xml"):
             try:
-                df = pd.read_xml(file_path)  # default parser (lxml)
-            except:
-                # fallback if structure is nested
-                df = pd.read_xml(file_path, xpath=".//row", parser="etree")
+                df = parse_navisworks_xml(file_path)
+            except Exception as e:
+                print(f"Failed to parse XML: {e}")
+                return
 
         else:
             print("Unsupported file format")

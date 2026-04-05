@@ -1,7 +1,7 @@
 /* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect, useState } from "react";
 import { useFetchdata } from "../hooks/useFetchdata";
-import type { DashDataTypes } from "../types/dashboardTypes";
+import type { DashDataTypes, AiSuggestionType } from "../types/dashboardTypes";
 // SVG Icons
 const Icons = {
     Chart: () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M3 3v18h18" /><path d="m19 9-5 5-4-4-3 3" /></svg>,
@@ -30,13 +30,32 @@ const Icons = {
 
 const Dashboard = () => {
     const [data, setData] = useState<DashDataTypes[]>([])
+    const [aiData, setAiData] = useState<AiSuggestionType[]>([])
 
-    const { fetchdata } = useFetchdata();
+    const { fetchdata, fetchAiData } = useFetchdata();
+
+    // Dynamic computations for UI
+    const totalClashes = data.length;
+    const highSeverityCount = data.filter(d => d.severity.toLowerCase() === 'high').length;
+    const mediumSeverityCount = data.filter(d => d.severity.toLowerCase() === 'medium').length;
+    const lowSeverityCount = data.filter(d => d.severity.toLowerCase() === 'low').length;
+
+    // Additional AI computations
+    const clashTypes = data.map(d => d.clash_type);
+    const mostCommonType = clashTypes.length > 0 ? clashTypes.sort((a,b) =>
+          clashTypes.filter(v => v===a).length
+        - clashTypes.filter(v => v===b).length
+    ).pop() : 'N/A';
+    const mostCommonCount = clashTypes.filter(v => v === mostCommonType).length;
+    const mostCommonPercentage = totalClashes > 0 ? Math.round((mostCommonCount / totalClashes) * 100) : 0;
+
 
     useEffect(() => {
         const fetch = async () => {
             const d = await fetchdata();
             setData(d || []);
+            const ai = await fetchAiData();
+            setAiData(ai || []);
         }
 
         fetch();
@@ -116,58 +135,58 @@ const Dashboard = () => {
 
                     {/* Summary Cards */}
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-                        <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-5 border-t-2 border-t-blue-500">
+                        <div className="bg-zinc-900/80 backdrop-blur-md border border-zinc-800 rounded-2xl p-6 border-t-[4px] border-t-blue-500 hover:-translate-y-1 hover:shadow-2xl hover:shadow-blue-500/10 transition-all duration-300">
                             <div className="flex justify-between items-start">
                                 <div>
-                                    <p className="text-zinc-400 text-sm font-medium uppercase tracking-wider mb-1">Total Clashes</p>
-                                    <h3 className="text-3xl font-bold text-white">1,284</h3>
+                                    <p className="text-zinc-400 text-xs font-bold uppercase tracking-wider mb-2">Total Clashes</p>
+                                    <h3 className="text-4xl font-black text-white tracking-tight">{totalClashes}</h3>
                                 </div>
-                                <div className="p-2 bg-blue-500/10 text-blue-500 rounded-lg">
+                                <div className="p-2.5 bg-blue-500/10 text-blue-500 rounded-xl">
                                     <Icons.Chart />
                                 </div>
                             </div>
-                            <p className="text-xs text-zinc-500 mt-4 flex items-center gap-1">
-                                <span className="text-red-400 font-medium">+12%</span> vs last scan
+                            <p className="text-xs text-zinc-500 mt-5 flex items-center gap-1.5">
+                                <span className="text-blue-400 font-medium">Updated live</span> vs source
                             </p>
                         </div>
 
-                        <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-5 border-t-2 border-t-red-500">
+                        <div className="bg-zinc-900/80 backdrop-blur-md border border-zinc-800 rounded-2xl p-6 border-t-[4px] border-t-red-500 hover:-translate-y-1 hover:shadow-2xl hover:shadow-red-500/10 transition-all duration-300">
                             <div className="flex justify-between items-start">
                                 <div>
-                                    <p className="text-zinc-400 text-sm font-medium uppercase tracking-wider mb-1">High Severity</p>
-                                    <h3 className="text-3xl font-bold text-white">42</h3>
+                                    <p className="text-zinc-400 text-xs font-bold uppercase tracking-wider mb-2">High Severity</p>
+                                    <h3 className="text-4xl font-black text-white tracking-tight">{highSeverityCount}</h3>
                                 </div>
-                                <div className="p-2 bg-red-500/10 text-red-500 rounded-lg">
+                                <div className="p-2.5 bg-red-500/10 text-red-500 rounded-xl">
                                     <div className="w-5 h-5 flex items-center justify-center font-bold text-lg">!</div>
                                 </div>
                             </div>
-                            <p className="text-xs text-zinc-500 mt-4">Critical path impact</p>
+                            <p className="text-xs text-zinc-500 mt-5 flex items-center gap-1.5">Critical path impact</p>
                         </div>
 
-                        <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-5 border-t-2 border-t-amber-500">
+                        <div className="bg-zinc-900/80 backdrop-blur-md border border-zinc-800 rounded-2xl p-6 border-t-[4px] border-t-amber-500 hover:-translate-y-1 hover:shadow-2xl hover:shadow-amber-500/10 transition-all duration-300">
                             <div className="flex justify-between items-start">
                                 <div>
-                                    <p className="text-zinc-400 text-sm font-medium uppercase tracking-wider mb-1">Medium Severity</p>
-                                    <h3 className="text-3xl font-bold text-white">156</h3>
+                                    <p className="text-zinc-400 text-xs font-bold uppercase tracking-wider mb-2">Medium Severity</p>
+                                    <h3 className="text-4xl font-black text-white tracking-tight">{mediumSeverityCount}</h3>
                                 </div>
-                                <div className="p-2 bg-amber-500/10 text-amber-500 rounded-lg">
+                                <div className="p-2.5 bg-amber-500/10 text-amber-500 rounded-xl">
                                     <Icons.WarningAlert />
                                 </div>
                             </div>
-                            <p className="text-xs text-zinc-500 mt-4">Requires manual review</p>
+                            <p className="text-xs text-zinc-500 mt-5 flex items-center gap-1.5">Requires manual review</p>
                         </div>
 
-                        <div className="bg-zinc-900 border border-zinc-800 rounded-xl p-5 border-t-2 border-t-emerald-500">
+                        <div className="bg-zinc-900/80 backdrop-blur-md border border-zinc-800 rounded-2xl p-6 border-t-[4px] border-t-emerald-500 hover:-translate-y-1 hover:shadow-2xl hover:shadow-emerald-500/10 transition-all duration-300">
                             <div className="flex justify-between items-start">
                                 <div>
-                                    <p className="text-zinc-400 text-sm font-medium uppercase tracking-wider mb-1">Low Severity</p>
-                                    <h3 className="text-3xl font-bold text-white">1,086</h3>
+                                    <p className="text-zinc-400 text-xs font-bold uppercase tracking-wider mb-2">Low Severity</p>
+                                    <h3 className="text-4xl font-black text-white tracking-tight">{lowSeverityCount}</h3>
                                 </div>
-                                <div className="p-2 bg-emerald-500/10 text-emerald-500 rounded-lg">
+                                <div className="p-2.5 bg-emerald-500/10 text-emerald-500 rounded-xl">
                                     <Icons.CheckCircle />
                                 </div>
                             </div>
-                            <p className="text-xs text-zinc-500 mt-4">Soft/Clearance items</p>
+                            <p className="text-xs text-zinc-500 mt-5 flex items-center gap-1.5">Soft/Clearance items</p>
                         </div>
                     </div>
 
@@ -226,21 +245,48 @@ const Dashboard = () => {
                             </h3>
 
                             <div className="space-y-4 flex-1">
-                                <div className="text-sm">
-                                    <p className="text-zinc-300 mb-2">Most common clash type: <strong className="text-white">Hard Clash (45% of total)</strong></p>
-                                    <p className="text-zinc-300">Number of high severity clashes: <strong className="text-red-400">42</strong></p>
+                                <div className="text-sm p-4 bg-zinc-800/20 rounded-xl border border-zinc-800 mb-6">
+                                    <p className="text-zinc-400 mb-2 flex justify-between">
+                                        <span>Most common clash type:</span>
+                                        <strong className="text-white bg-zinc-800 px-2 py-0.5 rounded">{mostCommonType} ({mostCommonPercentage}%)</strong>
+                                    </p>
+                                    <p className="text-zinc-400 flex justify-between">
+                                        <span>High severity clashes:</span>
+                                        <strong className="text-red-400 bg-red-500/10 px-2 py-0.5 rounded border border-red-500/20">{highSeverityCount}</strong>
+                                    </p>
                                 </div>
 
-                                <div className="p-4 bg-zinc-800/50 rounded-xl border border-zinc-700/50 mt-4">
-                                    <h4 className="text-white font-medium text-sm mb-2 flex items-center gap-2">
-                                        <div className="w-2 h-2 rounded-full bg-blue-500"></div> Suggestion Run
-                                    </h4>
-                                    <p className="text-zinc-400 text-sm leading-relaxed">
-                                        AI suggests rerouting HVAC line <span className="text-blue-400 font-medium">#332</span> to bypass structural interference at Level 4 Zone B.
-                                    </p>
-                                    <button className="mt-4 w-full py-2 bg-blue-600/10 hover:bg-blue-600/20 text-blue-500 text-sm font-medium rounded-lg transition-colors border border-blue-500/20">
-                                        View Routing Map
-                                    </button>
+                                <div className="mt-4 max-h-96 overflow-y-auto pr-2">
+                                    {aiData.length > 0 ? (
+                                        aiData.map((suggestion, idx) => (
+                                            <div key={idx} className="p-4 bg-zinc-800/50 rounded-xl border border-zinc-700/50 mb-3">
+                                                <h4 className="text-white font-medium text-sm mb-2 flex items-center gap-2">
+                                                    <div className="w-2 h-2 rounded-full bg-blue-500"></div> Suggestion {idx + 1} ({suggestion.action})
+                                                </h4>
+                                                <p className="text-zinc-400 text-sm leading-relaxed mb-3">
+                                                    AI suggests rerouting element <span className="text-blue-400 font-medium">#{suggestion.element_id}</span> for clash <span className="text-white">{suggestion.clash_id}</span>.
+                                                </p>
+                                                <div className="bg-zinc-900 rounded-lg p-3 grid grid-cols-2 gap-2 text-xs">
+                                                    <div>
+                                                        <span className="text-zinc-500 block mb-1">New Position</span>
+                                                        <div className="text-zinc-300 font-mono">X: {suggestion.new_position.x.toFixed(1)}</div>
+                                                        <div className="text-zinc-300 font-mono">Y: {suggestion.new_position.y.toFixed(1)}</div>
+                                                        <div className="text-zinc-300 font-mono">Z: {suggestion.new_position.z.toFixed(1)}</div>
+                                                    </div>
+                                                    <div>
+                                                        <span className="text-zinc-500 block mb-1">Offset (Δ)</span>
+                                                        <div className="text-zinc-300 font-mono">X: {suggestion.offsets.x.toFixed(1)}</div>
+                                                        <div className="text-zinc-300 font-mono">Y: {suggestion.offsets.y.toFixed(1)}</div>
+                                                        <div className="text-zinc-300 font-mono">Z: {suggestion.offsets.z.toFixed(1)}</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        ))
+                                    ) : (
+                                        <div className="p-4 bg-zinc-800/50 rounded-xl border border-zinc-700/50 flex items-center justify-center text-zinc-500 text-sm h-32">
+                                            No AI suggestions currently available.
+                                        </div>
+                                    )}
                                 </div>
 
                                 <blockquote className="border-l-[3px] border-blue-500 pl-4 py-1 mt-6 bg-blue-500/5 rounded-r-lg">

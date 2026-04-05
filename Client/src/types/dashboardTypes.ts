@@ -10,3 +10,19 @@ export interface DashDataTypes {
     y:number,
     z:number
 }
+
+export interface AiSuggestionType {
+    clash_id: string,
+    element_id: string,
+    action: string,
+    new_position: {
+        x: number,
+        y: number,
+        z: number
+    },
+    offsets: {
+        x: number,
+        y: number,
+        z: number
+    }
+}
