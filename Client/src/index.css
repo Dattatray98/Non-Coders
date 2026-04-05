@@ -1,1 +1,16 @@
+/* Replace .element with your specific class, or use 'body' for the whole page */
+.hide-scrollbar {
+  /* Firefox */
+  scrollbar-width: none;
+  
+  /* IE and Edge */
+  -ms-overflow-style: none;
+}
+
+/* Chrome, Safari, and Opera */
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+
 @import "tailwindcss"

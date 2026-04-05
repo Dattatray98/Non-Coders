@@ -22,9 +22,11 @@ def cleaner(file_path):
             "item1_type": ["item1_type", "item_1_type", "element1_type"],
             "item2_id": ["item2_id", "item_2_id", "element2_id"],
             "item2_type": ["item2_type", "item_2_type", "element2_type"],
+            "clash_type": ["clash_type"],
+            "severity": ["severity"],
             "x": ["x"],
             "y": ["y"],
-            "z": ["z"]
+            "z": ["z"],
         }
 
         # Resolve columns
