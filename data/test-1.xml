@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<exchange xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" units="m" filename="RVT_Model_MEP_for_Orkathon_detached.rvt" filepath="C:\Users\Jeet\Downloads\Revit_Model_For_Orchathon\2026">
+  <batchtest name="Report" internal_name="Report" units="m">
+    <clashtests>
+      <clashtest name="Test 1" test_type="hard" status="ok" tolerance="0.001" merge_composites="1">
+        <default_assignee display_name=""/>
+        <linkage mode="none"/>
+        <left>
+          <clashselection selfintersect="0" primtypes="1">
+            <locator>/</locator>
+          </clashselection>
+        </left>
+        <right>
+          <clashselection selfintersect="0" primtypes="1">
+            <locator>/</locator>
+          </clashselection>
+        </right>
+        <rules/>
+        <summary total="6" new="6" active="0" reviewed="0" approved="0" resolved="0">
+          <testtype>Hard</testtype>
+          <teststatus>OK</teststatus>
+        </summary>
+        <clashresults>
+          <clashresult name="Clash1" guid="090a5f4a-f0b5-4a37-a3ae-9e1e32ba0cfe" href="Test 1_files\cd000001.jpg" status="new" distance="-0.019">
+            <resultstatus>New</resultstatus>
+            <clashpoint>
+              <pos3f x="-0.381" y="10.632" z="-0.190"/>
+            </clashpoint>
+            <gridlocation>C-1 : GATE LEVEL</gridlocation>
+            <createddate>
+              <date year="2026" month="4" day="5" hour="9" minute="54" second="6"/>
+            </createddate>
+            <clashobjects>
+              <clashobject>
+                <objectattribute>
+                  <name>Element ID</name>
+                  <value>9300658</value>
+                </objectattribute>
+                <layer>GROUND FLOOR</layer>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>Waste Pipe</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>Item Type</name>
+                    <value>Solid</value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+              <clashobject>
+                <objectattribute>
+                  <name>Element ID</name>
+                  <value>9482177</value>
+                </objectattribute>
+                <layer>GROUND FLOOR</layer>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>Domestic Cold Water</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>Item Type</name>
+                    <value>Solid</value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+            </clashobjects>
+          </clashresult>
+          <clashresult name="Clash2" guid="9dee693b-9ff3-4eb7-af2c-c73625228468" href="Test 1_files\cd000002.jpg" status="new" distance="-0.009">
+            <resultstatus>New</resultstatus>
+            <clashpoint>
+              <pos3f x="-0.364" y="7.853" z="-0.192"/>
+            </clashpoint>
+            <gridlocation>D-1 : GATE LEVEL</gridlocation>
+            <createddate>
+              <date year="2026" month="4" day="5" hour="9" minute="54" second="6"/>
+            </createddate>
+            <clashobjects>
+              <clashobject>
+                <objectattribute>
+                  <name>Element ID</name>
+                  <value>9300658</value>
+                </objectattribute>
+                <layer>GROUND FLOOR</layer>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>Waste Pipe</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>Item Type</name>
+                    <value>Solid</value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+              <clashobject>
+                <objectattribute>
+                  <name>Element ID</name>
+                  <value>9036798</value>
+                </objectattribute>
+                <layer>GROUND FLOOR</layer>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>Standard</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>Item Type</name>
+                    <value>Pipe Fittings</value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+            </clashobjects>
+          </clashresult>
+          <clashresult name="Clash3" guid="6daad1e2-586c-4f2c-9626-40c67f65ba60" href="Test 1_files\cd000003.jpg" status="new" distance="-0.007">
+            <resultstatus>New</resultstatus>
+            <clashpoint>
+              <pos3f x="0.166" y="7.661" z="-0.203"/>
+            </clashpoint>
+            <gridlocation>D-1 : GATE LEVEL</gridlocation>
+            <createddate>
+              <date year="2026" month="4" day="5" hour="9" minute="54" second="6"/>
+            </createddate>
+            <clashobjects>
+              <clashobject>
+                <objectattribute>
+                  <name>Element ID</name>
+                  <value>9036790</value>
+                </objectattribute>
+                <layer>GROUND FLOOR</layer>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>Domestic Cold Water</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>Item Type</name>
+                    <value>Solid</value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+              <clashobject>
+                <objectattribute>
+                  <name>Element ID</name>
+                  <value>9300758</value>
+                </objectattribute>
+                <layer>GROUND FLOOR</layer>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>Waste Pipe</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>Item Type</name>
+                    <value>Solid</value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+            </clashobjects>
+          </clashresult>
+          <clashresult name="Clash4" guid="f4e6541b-cb85-49ad-9f46-3bf03a8bb9d4" href="Test 1_files\cd000004.jpg" status="new" distance="-0.005">
+            <resultstatus>New</resultstatus>
+            <clashpoint>
+              <pos3f x="0.104" y="7.752" z="-0.221"/>
+            </clashpoint>
+            <gridlocation>D-1 : GATE LEVEL</gridlocation>
+            <createddate>
+              <date year="2026" month="4" day="5" hour="9" minute="54" second="6"/>
+            </createddate>
+            <clashobjects>
+              <clashobject>
+                <objectattribute>
+                  <name>Element ID</name>
+                  <value>9481999</value>
+                </objectattribute>
+                <layer>GROUND FLOOR</layer>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>Standard</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>Item Type</name>
+                    <value>Pipe Fittings</value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+              <clashobject>
+                <objectattribute>
+                  <name>Element ID</name>
+                  <value>9300758</value>
+                </objectattribute>
+                <layer>GROUND FLOOR</layer>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>Waste Pipe</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>Item Type</name>
+                    <value>Solid</value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+            </clashobjects>
+          </clashresult>
+          <clashresult name="Clash5" guid="0ddd6310-3388-41ac-aafb-fd5173183716" href="Test 1_files\cd000005.jpg" status="new" distance="-0.001">
+            <resultstatus>New</resultstatus>
+            <clashpoint>
+              <pos3f x="-0.071" y="7.761" z="-0.225"/>
+            </clashpoint>
+            <gridlocation>D-1 : GATE LEVEL</gridlocation>
+            <createddate>
+              <date year="2026" month="4" day="5" hour="9" minute="54" second="6"/>
+            </createddate>
+            <clashobjects>
+              <clashobject>
+                <objectattribute>
+                  <name>Element ID</name>
+                  <value>9300732</value>
+                </objectattribute>
+                <layer>GROUND FLOOR</layer>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>Standard</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>Item Type</name>
+                    <value>Pipe Fittings</value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+              <clashobject>
+                <objectattribute>
+                  <name>Element ID</name>
+                  <value>9036792</value>
+                </objectattribute>
+                <layer>GROUND FLOOR</layer>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>Domestic Cold Water</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>Item Type</name>
+                    <value>Solid</value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+            </clashobjects>
+          </clashresult>
+          <clashresult name="Clash6" guid="bc2911a5-3a8f-425e-9b20-0017287921ac" href="Test 1_files\cd000006.jpg" status="new" distance="-0.001">
+            <resultstatus>New</resultstatus>
+            <clashpoint>
+              <pos3f x="-0.372" y="6.895" z="-0.207"/>
+            </clashpoint>
+            <gridlocation>D-1 : GATE LEVEL</gridlocation>
+            <createddate>
+              <date year="2026" month="4" day="5" hour="9" minute="54" second="6"/>
+            </createddate>
+            <clashobjects>
+              <clashobject>
+                <objectattribute>
+                  <name>Element ID</name>
+                  <value>9491906</value>
+                </objectattribute>
+                <layer>&lt;No level&gt;</layer>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>Alluminum Paint Dark Gray</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>Item Type</name>
+                    <value>Solid</value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+              <clashobject>
+                <objectattribute>
+                  <name>Element ID</name>
+                  <value>9300611</value>
+                </objectattribute>
+                <layer>GROUND FLOOR</layer>
+                <smarttags>
+                  <smarttag>
+                    <name>Item Name</name>
+                    <value>Waste Pipe</value>
+                  </smarttag>
+                  <smarttag>
+                    <name>Item Type</name>
+                    <value>Solid</value>
+                  </smarttag>
+                </smarttags>
+              </clashobject>
+            </clashobjects>
+          </clashresult>
+        </clashresults>
+      </clashtest>
+    </clashtests>
+    <selectionsets/>
+  </batchtest>
+</exchange>
