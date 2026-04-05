@@ -180,7 +180,7 @@ const Dashboard = () => {
                                 {/* <button className="text-sm text-blue-500 hover:text-blue-400 font-medium">View All</button> */}
                             </div>
                             <div className="overflow-x-auto">
-                                <table className="w-full text-left border-collapse">
+                                <table className="w-full text-left border-collapse ">
                                     <thead>
                                         <tr className="border-b border-zinc-800 text-xs uppercase tracking-wider text-zinc-500 bg-zinc-900/50">
                                             <th className="px-5 py-3 font-medium">Clash ID</th>
@@ -190,7 +190,7 @@ const Dashboard = () => {
                                             <th className="px-5 py-3 font-medium">Coordinates</th>
                                         </tr>
                                     </thead>
-                                    <tbody className="text-sm divide-y divide-zinc-800/50  border border-red-800">
+                                    <tbody className="text-sm divide-y divide-zinc-800/50">
                                         {data.map((clash, i) => (
                                             <tr key={i} className="hover:bg-zinc-800/30 transition-colors overflow-y-auto max-h-[20vh]">
                                                 <td className="px-5 py-4 align-middle font-medium text-blue-400">{clash.clash_id}</td>
