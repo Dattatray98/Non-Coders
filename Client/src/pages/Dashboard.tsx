@@ -29,14 +29,14 @@ const Icons = {
 
 
 const Dashboard = () => {
-    const [data, setData] = useState<[DashDataTypes] | []>([])
+    const [data, setData] = useState<DashDataTypes[]>([])
 
     const { fetchdata } = useFetchdata();
 
     useEffect(() => {
         const fetch = async () => {
             const d = await fetchdata();
-            setData(d);
+            setData(d || []);
         }
 
         fetch();

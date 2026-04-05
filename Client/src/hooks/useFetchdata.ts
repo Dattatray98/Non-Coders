@@ -10,6 +10,7 @@ export const useFetchdata = () => {
             
         } catch (error) {
             console.error(error)
+            return []
         }
     }
 
