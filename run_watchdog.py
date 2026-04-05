@@ -2,7 +2,7 @@ import time
 import os
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
-from src.pipeline import run_full_pipeline
+from pipeline import run_full_pipeline
 
 last_processed = {}
 
