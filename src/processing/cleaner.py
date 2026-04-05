@@ -4,18 +4,33 @@ import pandas as pd
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
 
-
 # CLEANER FUNCTION
 def cleaner(file_path):
     print("Cleaning file:", file_path)
 
     try:
-        df = pd.read_csv(file_path)
+        # -------------------------
+        # 1. READ FILE (CSV or XML)
+        # -------------------------
+        if file_path.endswith(".csv"):
+            df = pd.read_csv(file_path)
 
-        # Normalize column names
+        elif file_path.endswith(".xml"):
+            try:
+                df = pd.read_xml(file_path)  # default parser (lxml)
+            except:
+                # fallback if structure is nested
+                df = pd.read_xml(file_path, xpath=".//row", parser="etree")
+
+        else:
+            print("Unsupported file format")
+            return
+
+        # -------------------------
+        # 2. NORMALIZE COLUMNS
+        # -------------------------
         df.columns = [col.strip().lower().replace(" ", "_") for col in df.columns]
 
-        # Column mapping
         column_map = {
             "clash_id": ["clash_id", "clashname", "clash_name"],
             "item1_id": ["item1_id", "item_1_id", "element1_id"],
@@ -29,49 +44,51 @@ def cleaner(file_path):
             "z": ["z"],
         }
 
-        # Resolve columns
         resolved_cols = {}
+
         for key, options in column_map.items():
             for opt in options:
                 if opt in df.columns:
                     resolved_cols[key] = opt
                     break
 
-        # Check required fields
+        # -------------------------
+        # 3. VALIDATION
+        # -------------------------
         required_keys = ["clash_id", "item1_id", "item2_id", "x", "y", "z"]
         for key in required_keys:
             if key not in resolved_cols:
                 raise ValueError(f"Missing required column: {key}")
 
-        # Select + rename
+        # -------------------------
+        # 4. CLEAN DATA
+        # -------------------------
         cdf = df[[resolved_cols[k] for k in resolved_cols]].copy()
         cdf.columns = list(resolved_cols.keys())
 
-        # Drop invalid rows
         cdf.dropna(subset=["clash_id", "item1_id", "item2_id"], inplace=True)
 
-        # Convert coordinates
         for coord in ["x", "y", "z"]:
             cdf[coord] = pd.to_numeric(cdf[coord], errors="coerce")
 
         cdf.dropna(subset=["x", "y", "z"], inplace=True)
 
-        # Normalize types
         if "item1_type" in cdf.columns:
             cdf["item1_type"] = cdf["item1_type"].astype(str).str.capitalize()
 
         if "item2_type" in cdf.columns:
             cdf["item2_type"] = cdf["item2_type"].astype(str).str.capitalize()
 
-        # Output folder
+        # -------------------------
+        # 5. SAVE OUTPUT
+        # -------------------------
         os.makedirs("output", exist_ok=True)
 
-        # Unique file naming
-        filename = os.path.basename(file_path).replace(".csv", "")
+        filename = os.path.splitext(os.path.basename(file_path))[0]
+
         json_path = f"output/{filename}.json"
         csv_path = f"output/{filename}.csv"
 
-        # Save
         cdf.to_json(json_path, orient="records", indent=4)
         cdf.to_csv(csv_path, index=False)
 
@@ -86,18 +103,20 @@ def cleaner(file_path):
 # WATCHDOG CLASS
 last_processed = {}
 
-
 class MyHandler(FileSystemEventHandler):
     def on_modified(self, event):
         if event.is_directory:
             return
 
-        if not event.src_path.endswith(".csv"):
+        # -------------------------
+        # 6. FILE TYPE FILTER
+        # -------------------------
+        if not (event.src_path.endswith(".csv") or event.src_path.endswith(".xml")):
             return
 
         current_time = time.time()
 
-        # Debounce (avoid duplicate triggers)
+        # Debounce
         if event.src_path in last_processed:
             if current_time - last_processed[event.src_path] < 2:
                 return
@@ -106,7 +125,7 @@ class MyHandler(FileSystemEventHandler):
 
         print("File detected:", event.src_path)
 
-        time.sleep(1)  # wait for file write completion
+        time.sleep(1)
 
         try:
             cleaner(event.src_path)
